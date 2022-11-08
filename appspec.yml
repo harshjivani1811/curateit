@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+ - source: .
+   destination: /home/ubuntu/curateit-backend
+hooks:
+  AfterInstall:
+   - location: server-configs/install_app_dependencies
+     timeout: 300
+     runas: root
+  ApplicationStart:
+   - location: server-configs/start_server
+     timeout: 300
+     runas: root

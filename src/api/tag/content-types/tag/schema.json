@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tags",
+  "info": {
+    "singularName": "tag",
+    "pluralName": "tags",
+    "displayName": "Tags",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "gem_tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::gem-tag.gem-tag",
+      "mappedBy": "tag"
+    },
+    "tag": {
+      "type": "string"
+    }
+  }
+}

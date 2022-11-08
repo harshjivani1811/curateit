@@ -1,0 +1,76 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gems",
+  "info": {
+    "singularName": "gem",
+    "pluralName": "gems",
+    "displayName": "Gems"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "categories": {
+      "type": "string"
+    },
+    "collection": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "string"
+    },
+    "media": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "media_type": {
+      "type": "string"
+    },
+    "metaData": {
+      "type": "json"
+    },
+    "upvotes": {
+      "type": "integer"
+    },
+    "downvotes": {
+      "type": "integer"
+    },
+    "comments": {
+      "type": "string"
+    },
+    "is_favourite": {
+      "type": "boolean"
+    },
+    "gem_tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::gem-tag.gem-tag",
+      "mappedBy": "gems"
+    },
+    "gem_categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::gem-categorie.gem-categorie",
+      "mappedBy": "Gem"
+    },
+    "collection_gems": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::collection.collection",
+      "inversedBy": "gems"
+    }
+  }
+}
