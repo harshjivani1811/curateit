@@ -16,6 +16,10 @@ module.exports = {
         throw new Error();
       };
 
+      // if (!filter.where.value.startsWith('https://')) {
+      //   ctx.send('Please Ensure url has protocol (http or https) and hostname')
+      // }
+
       const URL = filter.where
       console.log("Controller", URL);
       const data = await strapi

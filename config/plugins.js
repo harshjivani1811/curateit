@@ -13,20 +13,20 @@ module.exports = ({ env }) => {
       config: {
         provider: 'nodemailer',
         providerOptions: {
-        
-          service: 'gmail',
-          port: 25,
-          auth: {
-            user: 'harshj.mobio@gmail.com',
-            pass: 'xuvuwiqezlshpnup',
+          // service: 'gmail',
+          host: 'smtp.zoho.eu',
+          port: 587,
+          secure: false,
+          auth: { 
+            user: 'noreply@curateit.com',
+            pass: 'vf1UH8CNSGTU',
           },
           tls: { rejectUnauthorized: false },
-          secure: false
 
         },
         settings: {
-          defaultFrom: 'harshj.mobio@gmail.com',
-          defaultReplyTo: 'harshj.mobio@gmail.com',
+          defaultFrom: 'noreply@curateit.com',
+          defaultReplyTo: 'noreply@curateit.com',
         },
       }
     },
