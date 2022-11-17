@@ -158,31 +158,31 @@ module.exports = () => ({
     const { status, data, response } = await mql(urldata);
     console.log("microlink");
 
-    // iframelyData
-    const iframely = await axios.get(
-      `https://iframe.ly/api/iframely?url=${urldata}/&api_key=${process.env.IFRAMELY_API_KEY}&iframe=1&omit_script=1`
-    );
+    // // iframelyData
+    // const iframely = await axios.get(
+    //   `https://iframe.ly/api/iframely?url=${urldata}/&api_key=${process.env.IFRAMELY_API_KEY}&iframe=1&omit_script=1`
+    // );
 
-    const coreData = {
-      iframely: iframely.data,
-      publisher: data.publisher,
-      lang: data.lang,
-      author: data.author,
-      date: data.date,
-    };
-    console.log("core");
+    // const coreData = {
+    //   iframely: iframely.data,
+    //   publisher: data.publisher,
+    //   lang: data.lang,
+    //   author: data.author,
+    //   date: data.date,
+    // };
+    // console.log("core");
 
-    // htmlData
-    const htmlData = await mql(urldata, {
-      apiKey: process.env.MICROLINK_API_KEY,
-      meta: false,
-      data: {
-        html: {
-          selector: "html",
-        },
-      },
-    });
-    console.log("html");
+    // // htmlData
+    // const htmlData = await mql(urldata, {
+    //   apiKey: process.env.MICROLINK_API_KEY,
+    //   meta: false,
+    //   data: {
+    //     html: {
+    //       selector: "html",
+    //     },
+    //   },
+    // });
+    // console.log("html");
 
     // linkData
     const browser = await puppeteer.launch({
@@ -205,11 +205,11 @@ module.exports = () => ({
     await window.close();
     console.log("text");
 
-    // traficData
-    const traficData = await axios.get(
-      `https://api.hexomatic.com/v2/app/services/v1/workflows/${process.env.WORKFLOW_ID}?key=${process.env.TRAFFIC_API_KEY}`
-    );
-    console.log("traffic");
+    // // traficData
+    // const traficData = await axios.get(
+    //   `https://api.hexomatic.com/v2/app/services/v1/workflows/${process.env.WORKFLOW_ID}?key=${process.env.TRAFFIC_API_KEY}`
+    // );
+    // console.log("traffic");
 
     // email and phonenumber array
     // webcontactData
@@ -254,51 +254,51 @@ module.exports = () => ({
     }
     console.log("email<=>>>>");
 
-    // sociallinkData
-    const sociallinkData = await axios.get(
-      `https://website-contacts.whoisxmlapi.com/api/v1?apiKey=${process.env.WEB_CONTACT_KEY}&domainName=${urldata}`
-    );
-    console.log("sociallink");
+    // // sociallinkData
+    // const sociallinkData = await axios.get(
+    //   `https://website-contacts.whoisxmlapi.com/api/v1?apiKey=${process.env.WEB_CONTACT_KEY}&domainName=${urldata}`
+    // );
+    // console.log("sociallink");
 
-    // category
-    const categoryData = await axios.get(
-      `https://website-categorization.whoisxmlapi.com/api/v2?apiKey=${process.env.WEB_CONTACT_KEY}&domainName=${urldata}`
-    );
-    let categoryArr = [];
-    categoryData.data.categories.map((data) => {
-      if (data.tier1 === null) {
-        categoryArr;
-      } else {
-        categoryArr.push(data.tier1.name);
-      }
-      console.log("catgery 2 start");
-      if (data.tier2 === null) {
-        categoryArr;
-      } else {
-        categoryArr.push(data.tier2.name);
-      }
-    });
-    console.log("categoty");
+    // // category
+    // const categoryData = await axios.get(
+    //   `https://website-categorization.whoisxmlapi.com/api/v2?apiKey=${process.env.WEB_CONTACT_KEY}&domainName=${urldata}`
+    // );
+    // let categoryArr = [];
+    // categoryData.data.categories.map((data) => {
+    //   if (data.tier1 === null) {
+    //     categoryArr;
+    //   } else {
+    //     categoryArr.push(data.tier1.name);
+    //   }
+    //   console.log("catgery 2 start");
+    //   if (data.tier2 === null) {
+    //     categoryArr;
+    //   } else {
+    //     categoryArr.push(data.tier2.name);
+    //   }
+    // });
+    // console.log("categoty");
 
-    // excerptData
-    const code = async ({ url, html }) => {
-      const dom = new JSDOM(html, {
-        url,
-        virtualConsole: new VirtualConsole(),
-      });
+    // // excerptData
+    // const code = async ({ url, html }) => {
+    //   const dom = new JSDOM(html, {
+    //     url,
+    //     virtualConsole: new VirtualConsole(),
+    //   });
 
-      const reader = new Readability(dom.window.document);
-      return reader.parse().excerpt;
-    };
-    const excerpts = (url, props) => {
-      return mql(url, {
-        function: code.toString(),
-        meta: false,
-        ...props,
-      }).then(({ data }) => data.function);
-    };
-    const excerptsData = await excerpts(urldata);
-    console.log("excerts");
+    //   const reader = new Readability(dom.window.document);
+    //   return reader.parse().excerpt;
+    // };
+    // const excerpts = (url, props) => {
+    //   return mql(url, {
+    //     function: code.toString(),
+    //     meta: false,
+    //     ...props,
+    //   }).then(({ data }) => data.function);
+    // };
+    // const excerptsData = await excerpts(urldata);
+    // console.log("excerts");
 
     // githubData
     let githubRes;
@@ -577,77 +577,77 @@ module.exports = () => ({
       twitterRes = twitterData;
     }
 
-    // technologystackData
-    const technologystackData = await mql(urldata, {
-      apiKey: process.env.MICROLINK_API_KEY,
-      meta: false,
-      insights: {
-        lighthouse: false,
-        technologies: true,
-      },
-    });
-    console.log("technology");
-    // fullscreenshotData
-    const fullscreenshotData = await mql(urldata, {
-      apiKey: process.env.MICROLINK_API_KEY,
-      meta: false,
-      screenshot: true,
-      fullpage: true,
-    });
+    // // technologystackData
+    // const technologystackData = await mql(urldata, {
+    //   apiKey: process.env.MICROLINK_API_KEY,
+    //   meta: false,
+    //   insights: {
+    //     lighthouse: false,
+    //     technologies: true,
+    //   },
+    // });
+    // console.log("technology");
+    // // fullscreenshotData
+    // const fullscreenshotData = await mql(urldata, {
+    //   apiKey: process.env.MICROLINK_API_KEY,
+    //   meta: false,
+    //   screenshot: true,
+    //   fullpage: true,
+    // });
 
-    // screenshotData
-    const screenshotData = await mql(urldata, {
-      apiKey: process.env.MICROLINK_API_KEY,
-      meta: false,
-      screenshot: true,
-    });
-    console.log("screenshot");
+    // // screenshotData
+    // const screenshotData = await mql(urldata, {
+    //   apiKey: process.env.MICROLINK_API_KEY,
+    //   meta: false,
+    //   screenshot: true,
+    // });
+    // console.log("screenshot");
 
-    // healthcheckData
-    const healtcheckInfo = async ({ query, page, response }) => ({
-      url: response && response.url(),
-      statusCode: response && response.status(),
-      // headers: response && response.headers(),
-      // html: await page.content()
-    });
-    const healthcheckData = await mql(urldata, {
-      apiKey: process.env.MICROLINK_API_KEY,
-      function: healtcheckInfo.toString(),
-      meta: false,
-    });
-    console.log("health");
+    // // healthcheckData
+    // const healtcheckInfo = async ({ query, page, response }) => ({
+    //   url: response && response.url(),
+    //   statusCode: response && response.status(),
+    //   // headers: response && response.headers(),
+    //   // html: await page.content()
+    // });
+    // const healthcheckData = await mql(urldata, {
+    //   apiKey: process.env.MICROLINK_API_KEY,
+    //   function: healtcheckInfo.toString(),
+    //   meta: false,
+    // });
+    // console.log("health");
 
-    // embedData
-    const embedData = await axios.get(
-      `https://iframe.ly/api/oembed?url=${urldata}/&api_key=${process.env.IFRAMELY_API_KEY}&iframe=1&omit_script=1`
-    );
-    console.log("embed");
+    // // embedData
+    // const embedData = await axios.get(
+    //   `https://iframe.ly/api/oembed?url=${urldata}/&api_key=${process.env.IFRAMELY_API_KEY}&iframe=1&omit_script=1`
+    // );
+    // console.log("embed");
 
     // imageColorData
     // landing page color
-    const colors = await getColors(screenshotData.data.screenshot.url);
-    let col = [];
-    for (let i = 0; i < colors.length; i++) {
-      colors.forEach((color) => {
-        col.push(color.hex());
-      });
-    }
+    // const colors = await getColors(screenshotData.data.screenshot.url);
+    // let col = [];
+    // for (let i = 0; i < colors.length; i++) {
+    //   colors.forEach((color) => {
+    //     col.push(color.hex());
+    //   });
+    // }
 
-    // logo color
-    let logoCol = [];
-    if (data.logo === null) {
-      logoCol = null;
-    } else if (data.logo.type === "ico") {
-      logoCol = null;
-    } else {
-      const logoColor = await getColors(data.logo.url);
-      for (let i = 0; i < logoColor.length; i++) {
-        logoColor.forEach((color) => {
-          logoCol.push(color.hex());
-        });
-      }
-    }
-    console.log("logo");
+    // // logo color
+    // let logoCol = [];
+    // if (data.logo === null) {
+    //   logoCol = null;
+    // } else if (data.logo.type === "ico") {
+    //   logoCol = null;
+    // } else {
+    //   const logoColor = await getColors(data.logo.url);
+    //   for (let i = 0; i < logoColor.length; i++) {
+    //     logoColor.forEach((color) => {
+    //       logoCol.push(color.hex());
+    //     });
+    //   }
+    // }
+    // console.log("logo");
 
     // digitalRank
     let digitalRes;
@@ -680,19 +680,197 @@ module.exports = () => ({
     }
     console.log("result");
 
-    // let [htmlResult, hrefResult, textResult] = await Promise.all([
-    //     await mql(urldata, {
-    //         apiKey: process.env.MICROLINK_API_KEY,
-    //         meta: false,
-    //         data: {
-    //           html: {
-    //             selector: "html",
-    //           },
-    //         },
-    //       }), 
-    //       await page.$$eval("a", (as) => as.map((a) => a.href)), 
-    //       await list.$eval("*", (el) => el.innerText)
-    // ]);
+    const healthcheckData = async ({ query, page, response }) => ({
+      url: response && response.url(),
+      statusCode: response && response.status(),
+      // headers: response && response.headers(),
+      // html: await page.content()
+    });
+    const code = async ({ url, html }) => {
+      const dom = new JSDOM(html, {
+        url,
+        virtualConsole: new VirtualConsole(),
+      });
+
+      const reader = new Readability(dom.window.document);
+      return reader.parse().excerpt;
+    };
+    const excerpts = (url, props) => {
+      return mql(url, {
+        function: code.toString(),
+        meta: false,
+        ...props,
+      }).then(({ data }) => data.function);
+    }
+
+    // let logoCol = [];
+    // if (data.logo === null) {
+    //   logoCol = null;
+    // }
+    // if (data.logo.type === "ico") {
+    //   logoCol = null;
+    // } 
+
+  let [ iframely, html, traffic,excerpt, sociallink,category,   embed,  healthcheck, screenshot, fullscreenshot, technologystack] = await Promise.allSettled([
+    // // microlink
+    // await mql(urldata),
+    // iframely
+    await axios.get(
+      `https://iframe.ly/api/iframely?url=${urldata}/&api_key=${process.env.IFRAMELY_API_KEY}&iframe=1&omit_script=1`
+    ),
+    // html
+    await mql(urldata, {
+      apiKey: process.env.MICROLINK_API_KEY,
+      meta: false,
+      data: {
+        html: {
+          selector: "html",
+        },
+      },
+    }),
+    // traffic
+    await axios.get(
+      `https://api.hexomatic.com/v2/app/services/v1/workflows/${process.env.WORKFLOW_ID}?key=${process.env.TRAFFIC_API_KEY}`
+    ),
+    // // webcontact
+    // await axios.get(
+    //   `https://website-contacts.whoisxmlapi.com/api/v1?apiKey=${process.env.WEB_CONTACT_KEY}&domainName=${urldata}`
+    // ),
+    // // email
+    // await axios.get(
+    //   `https://iframe.ly/api/oembed?url=${urldata}/&api_key=ce85ecff19fbd7dba1cf97&iframe=1&omit_script=1`
+    //   ),
+      // excerpts
+      await excerpts(urldata),
+        // sociallink
+        await axios.get(
+          `https://website-contacts.whoisxmlapi.com/api/v1?apiKey=${process.env.WEB_CONTACT_KEY}&domainName=${urldata}`
+        ),
+        // category
+        await axios.get(
+          `https://website-categorization.whoisxmlapi.com/api/v2?apiKey=${process.env.WEB_CONTACT_KEY}&domainName=${urldata}`
+        ),
+        // embed
+        await axios.get(
+          `https://website-contacts.whoisxmlapi.com/api/v1?apiKey=${process.env.WEB_CONTACT_KEY}&domainName=${urldata}`
+        ),
+        // healthcheck
+        await mql(urldata, {
+          apiKey: process.env.MICROLINK_API_KEY,
+          function: healthcheckData.toString(),
+          meta: false,
+        }),
+        // screenshot
+        await mql(urldata, {
+          apiKey: process.env.MICROLINK_API_KEY,
+          meta: false,
+          screenshot: true,
+        }),
+        // fullscreenshot
+        await mql(urldata, {
+          apiKey: process.env.MICROLINK_API_KEY,
+          meta: false,
+          screenshot: true,
+          fullpage: true,
+        }),
+        // // imagecolor
+        // await getColors(screenshot.value.data.screenshot.url),
+        // await getColors(data.logo.url),
+        // technologyStack
+        await mql(urldata, {
+          apiKey: process.env.MICROLINK_API_KEY,
+          meta: false,
+          insights: {
+            lighthouse: false,
+            technologies: true,
+          },
+        })
+  ]);
+
+  const coreData = {
+    iframely: iframely.value.data,
+    publisher: data.publisher,
+    lang: data.lang,
+    author: data.author,
+    date: data.date,
+  };
+
+//   let emailsArr = [];
+//     let phoneNumArr = [];
+//     let webcontactData = {
+//       emails: webcontact.value.data.emails,
+//       phones: webcontact.value.data.phones,
+//     };
+//     console.log(webcontactData.emails);
+//     webcontactData.emails.map((data) => {
+//       emailsArr.push(data.email);
+//     });
+//     console.log(webcontactData.phones);
+//     webcontactData.phones.map((data) => {
+//       phoneNumArr.push(data);
+//     });
+// console.log(email.value);
+//     if (email.value.data.emails === null) {
+//       emailsArr;
+//     } else {
+//       email.value.data.emails.map((data) => {
+//         emailsArr.push(data);
+//       });
+//     }
+console.log(category.value);
+    let categoryArr = [];
+    category.value.data.categories.map((data) => {
+      if (data.tier1 === null) {
+        categoryArr;
+      } else {
+        categoryArr.push(data.tier1.name);
+      }
+      if (data.tier2 === null) {
+        categoryArr;
+      } else {
+        categoryArr.push(data.tier2.name);
+      }
+    });
+
+    // let colors = landingpagecolor
+    // let col = [];
+    // for (let i = 0; i < colors.length; i++) {
+    //   colors.forEach((color) => {
+    //     col.push(color.hex());
+    //   });
+    // }
+
+    // let logocolors = logocolor
+    // for (let i = 0; i < logocolors.length; i++) {
+    //   logocolor.forEach((color) => {
+    //     logoCol.push(color.hex());
+    //   });
+    // }
+
+
+    // landing page color
+    const colors = await getColors(screenshot.value.data.screenshot.url);
+    let col = [];
+    for (let i = 0; i < colors.length; i++) {
+      colors.forEach((color) => {
+        col.push(color.hex());
+      });
+    }
+    // logo color
+    let logoCol = [];
+    if (data.logo === null) {
+      logoCol = null;
+    } else if (data.logo.type === "ico") {
+      logoCol = null;
+    } else {
+      const logoColor = await getColors(data.logo.url);
+      for (let i = 0; i < logoColor.length; i++) {
+        logoColor.forEach((color) => {
+          logoCol.push(color.hex());
+        });
+      }
+    }
+    console.log("logo");
 
     // console.log(htmlResult.data.html);
     // console.log(hrefResult);
@@ -710,25 +888,25 @@ module.exports = () => ({
             landingPageColor: col,
           }
         : null,
-      html: htmlURL ? htmlData.data.html : null,
-      iframe: embedURL ? embedData.data.html : null,
+      html: htmlURL ? html.value.data.html : null,
+      iframe: embedURL ? embed.value.data.html : null,
       link: linkURL ? hrefs : null,
 
       email: emailURL ? emailsArr : null,
       phonenumber: phonenumberURL ? phoneNumArr : null,
 
-      sociallink: sociallinkURL ? sociallinkData.data.socialLinks : null,
+      sociallink: sociallinkURL ? sociallink.value.data.socialLinks : null,
       category: categoryURL ? categoryArr : null,
       text: textURL ? extractedText : null,
       screenshot: {
         fullscreenshot: fullscreenshotURL
-          ? fullscreenshotData.data.screenshot
+          ? fullscreenshot.value.data.screenshot
           : null,
-        screenshot: screenshotURL ? screenshotData.data.screenshot : null,
+        screenshot: screenshotURL ? screenshot.value.data.screenshot : null,
       },
-      healthcheck: healthcheckURL ? healthcheckData.data : null,
+      healthcheck: healthcheckURL ? healthcheck.value.data : null,
       technologystack: technologystackURL
-        ? technologystackData.data.insights.technologies
+        ? technologystack.value.data.insights.technologies
         : null,
       additionalFields: {
         spotify: spotifyURL
@@ -805,9 +983,9 @@ module.exports = () => ({
           : null,
       },
 
-      excerpts: excerptsURL ? excerptsData : null,
+      excerpts: excerptsURL ? excerpt.data : null,
       digitalrank: digitalrankURL ? digitalRes.data.similar_rank : null,
-      traffic: trafficURL ? traficData.data.workflow.data : null,
+      traffic: trafficURL ? traffic.value.data.workflow.data : null,
     };
     return result;
   },
